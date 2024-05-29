@@ -43,6 +43,23 @@ variable "associate_security_group_ids" {
   description = "The IDs of the existing security groups to associate with the DB instance"
 }
 
+variable "database_name" {
+  type        = string
+  description = "The name of the database to create when the DB instance is created"
+}
+
+variable "database_user" {
+  type        = string
+  default     = null
+  description = "Username for the primary DB user."
+}
+
+variable "database_password" {
+  type        = string
+  default     = null
+  description = "Password for the primary DB user."
+}
+
 variable "database_manage_master_user_password" {
   type        = bool
   default     = false

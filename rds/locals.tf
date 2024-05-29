@@ -5,9 +5,9 @@ locals {
   subnet_ids_provided           = var.subnet_ids != null && length(var.subnet_ids) > 0
   db_subnet_group_name_provided = var.db_subnet_group_name != null && var.db_subnet_group_name != ""
   is_replica                    = try(length(var.replicate_source_db), 0) > 0
-  password                      = random_password.password.result
-  user                          = "user_${module.this.name}"
-  db_name                       = "eventStore"
+  password                      = var.database_password == null ? random_password.password.result : var.database_password
+  user                          = var.database_user == null ? "user_${module.this.name}" : var.database_user
+  db_name                       = var.database_name
 
   db_subnet_group_name = local.db_subnet_group_name_provided ? var.db_subnet_group_name : (
     local.is_replica ? null : (
